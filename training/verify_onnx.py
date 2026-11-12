@@ -13,9 +13,10 @@ LABELS_PATH = EXPORT_DIR / "labels.json"
 VAL_DIR = DATA_ROOT / "val"
 
 
-def predict_file(session: ort.InferenceSession, audio_path: Path, is_noise: bool = False) -> np.ndarray:
-    wav = load_and_trim_audio(audio_path, is_noise=is_noise)
-    chunk = fit_to_window(wav, is_noise=is_noise, is_train=False)
+
+def predict_file(session: ort.InferenceSession, audio_path: Path, is_unknown: bool = False) -> np.ndarray:
+    wav = load_and_trim_audio(audio_path, is_unknown=is_unknown)
+    chunk = fit_to_window(wav, is_unknown=is_unknown, is_train=False)
     logits = session.run(["logits"], {"waveform": chunk[np.newaxis, :]})[0][0]
     exp_x = np.exp(logits - np.max(logits))
     return exp_x / np.sum(exp_x)
@@ -39,7 +40,7 @@ def eval_validation_set():
         cls_correct = 0
 
         for f_path in files:
-            probs = predict_file(session, f_path, is_noise=(cls_name == "nen_tieng_on"))
+            probs = predict_file(session, f_path, is_unknown=(cls_name == "nen_tieng_on"))
             if int(np.argmax(probs)) == cls_idx:
                 cls_correct += 1
 

@@ -67,20 +67,20 @@ def split_audio_dataset(
     print("-" * 54)
     print(f"{'Tổng cộng (Total)':<18} | {total_train + total_val:>5} | {total_train:>11} | {total_val:>9}")
 
-def load_and_trim_audio(file_path: Path, is_noise: bool = False) -> np.ndarray | None:
+def load_and_trim_audio(file_path: Path, is_unknown: bool = False) -> np.ndarray | None:
     wav, _ = librosa.load(file_path, sr=SAMPLE_RATE, mono=True)
     if len(wav) < 1600:
         return None
 
-    if not is_noise:
+    if not is_unknown:
         trimmed, _ = librosa.effects.trim(wav, top_db=25)
         if len(trimmed) >= 1600:
             wav = trimmed
 
     return wav.astype(np.float32)
 
-def fit_to_window(wav: np.ndarray, is_noise: bool = False, is_train: bool = False) -> np.ndarray:
-    if is_noise:
+def fit_to_window(wav: np.ndarray, is_unknown: bool = False, is_train: bool = False) -> np.ndarray:
+    if is_unknown:
         if len(wav) >= NUM_SAMPLES:
             start = random.randint(0, len(wav) - NUM_SAMPLES) if is_train else 0
             return wav[start : start + NUM_SAMPLES].copy()

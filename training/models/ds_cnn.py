@@ -21,7 +21,7 @@ class DSConvBlock(nn.Module):
 
 
 class DSCNN(nn.Module):
-    def __init__(self, num_classes: int, channels: int = 96):
+    def __init__(self, num_classes: int, channels: int = 128):
         super().__init__()
         self.frontend = LogMelExtractor()
         self.spec_aug = SpecAugment()

@@ -1,9 +1,10 @@
 import math
+import random
+
+import librosa
 import torch
 import torch.nn as nn
 import torch.nn.functional as F
-import librosa
-import random
 
 class LogMelExtractor(nn.Module):
     def __init__(self, sr=16000, n_fft=512, win_length=400, hop_length=160, n_mels=64):

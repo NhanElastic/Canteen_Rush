@@ -5,8 +5,8 @@ from pathlib import Path
 import numpy as np
 import onnxruntime as ort
 
-from config import DATA_ROOT, EXPORT_DIR
-from dataset import fit_to_window, load_and_trim_audio
+from training.config import DATA_ROOT, EXPORT_DIR
+from training.utils import fit_to_window, load_and_trim_audio
 
 MODEL_PATH = EXPORT_DIR / "canteen_rush.onnx"
 LABELS_PATH = EXPORT_DIR / "labels.json"

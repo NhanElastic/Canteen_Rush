@@ -1,14 +1,23 @@
+import json
+import math
 import random
 import shutil
 from pathlib import Path
-import numpy as np
+
 import librosa
-import math
+import numpy as np
 import torch
 import torch.nn as nn
-import json
 
-from config import DATA_ROOT, NUM_SAMPLES, RAW_COLLECTED_DIR, SAMPLE_RATE, SEED, VALID_EXTS, EXPORT_DIR
+from training.config import (
+    DATA_ROOT,
+    EXPORT_DIR,
+    NUM_SAMPLES,
+    RAW_COLLECTED_DIR,
+    SAMPLE_RATE,
+    SEED,
+    VALID_EXTS,
+)
 
 
 def split_audio_dataset(

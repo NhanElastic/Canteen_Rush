@@ -17,3 +17,18 @@ BATCH_SIZE = 16
 EPOCHS = 35
 LEARNING_RATE = 1e-3
 SEED = 42
+
+KEYWORDS = [
+    "pho",
+    "banh_mi",
+    "com_tam",
+    "bun_cha",
+    "goi_cuon",
+    "nem_ran",
+    "coca",
+    "pepsi",
+    "tra_da",
+    "mien_ga",
+]
+ALL_CLASSES = sorted(KEYWORDS + ["unknown"])
+

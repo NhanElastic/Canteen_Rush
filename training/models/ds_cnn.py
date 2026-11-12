@@ -1,6 +1,6 @@
 import torch
 import torch.nn as nn
-from .audio_frontend import LogMelExtractor, SpecAugment
+from training.models.audio_frontend import LogMelExtractor, SpecAugment
 
 class DSConvBlock(nn.Module):
     def __init__(self, channels: int, stride: int = 1):

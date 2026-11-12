@@ -1,10 +1,12 @@
-from torch.utils.data import Dataset
-from pathlib import Path
-from .utils import load_and_trim_audio, fit_to_window
 import random
-import torch
+from pathlib import Path
 
-from config import NUM_SAMPLES,  VALID_EXTS
+import numpy as np
+import torch
+from torch.utils.data import Dataset
+
+from training.config import NUM_SAMPLES, VALID_EXTS
+from training.utils import fit_to_window, load_and_trim_audio
 
 class CanteenAudioDataset(Dataset):
     def __init__(self, split_dir: Path, class_names: list[str], is_train: bool = True):

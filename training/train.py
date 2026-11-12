@@ -1,10 +1,10 @@
 import json
-from .utils import export_onnx
+
 import torch
 import torch.nn as nn
 from torch.utils.data import DataLoader
 
-from config import (
+from training.config import (
     BATCH_SIZE,
     DATA_ROOT,
     EPOCHS,
@@ -12,9 +12,9 @@ from config import (
     OUTPUTS_DIR,
     SEED,
 )
-from dataset import CanteenAudioDataset
-from .models import DSCNN
-from .utils import set_seed
+from training.dataset import CanteenAudioDataset
+from training.models.ds_cnn import DSCNN
+from training.utils import export_onnx, set_seed, split_audio_dataset
 
 
 def train():
@@ -93,4 +93,5 @@ def train():
 
 
 if __name__ == "__main__":
+    split_audio_dataset()
     train()

@@ -11,6 +11,7 @@ from training.utils import fit_to_window, load_and_trim_audio
 class CanteenAudioDataset(Dataset):
     def __init__(self, split_dir: Path, class_names: list[str], is_train: bool = True):
         self.class_name = class_names
+        self.class_to_idx = {name: i for i, name in enumerate(class_names)}
         self.is_train = is_train
         self.file_paths = []
         self.samples: list[tuple[np.ndarray, int, bool]] = []
@@ -54,6 +55,6 @@ class CanteenAudioDataset(Dataset):
         chunk = fit_to_window(wav, is_unknown=is_unknown, is_train=self.is_train)
 
         if self.is_train:
-            chunk = self._argument(chunk, is_unknown=is_unknown)
+            chunk = self._augment(chunk, is_unknown=is_unknown)
 
         return torch.from_numpy(chunk), torch.tensor(label, dtype=torch.long)
